@@ -1,0 +1,30 @@
+[
+  {
+    "id": "90000000-0000-0000-0000-000000000001",
+    "title": "Stay by the blue doors",
+    "subtitle": "Warm courtyards, boutique stays, and handcrafted local routes.",
+    "image_path": "assets/images/banners/banner_blue_doors.jpg",
+    "cta_label": "Create stay"
+  },
+  {
+    "id": "90000000-0000-0000-0000-000000000002",
+    "title": "Taste Tunisia slowly",
+    "subtitle": "From medina tables to coastal kitchens, book food-first stops with real local value.",
+    "image_path": "assets/images/banners/banner_culinary.jpg",
+    "cta_label": "Explore food"
+  },
+  {
+    "id": "90000000-0000-0000-0000-000000000003",
+    "title": "Craft, cycle, discover",
+    "subtitle": "Mix artisan ateliers, heritage houses, and active days in one curated itinerary.",
+    "image_path": "assets/images/banners/banner_artisan.jpg",
+    "cta_label": "Plan route"
+  },
+  {
+    "id": "90000000-0000-0000-0000-000000000004",
+    "title": "Desert, oasis, coast",
+    "subtitle": "Build multi-region trips across Tunisia with budget-aware local recommendations.",
+    "image_path": "assets/images/banners/banner_oasis.jpg",
+    "cta_label": "Start planner"
+  }
+]

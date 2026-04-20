@@ -1,0 +1,362 @@
+[
+  {
+    "id": "20000000-0000-0000-0000-000000000001",
+    "slug": "tunis",
+    "name": "Tunis",
+    "description": "Capital energy, medina culture, design addresses, and a quick jump to waterfront life.",
+    "hero_image": "assets/images/regions/tunis_hero.jpg",
+    "cover_image": "assets/images/regions/tunis_cover.jpg",
+    "latitude": 36.8065,
+    "longitude": 10.1815,
+    "featured_tags": [
+      "Medina",
+      "Culture",
+      "Food"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000002",
+    "slug": "ariana",
+    "name": "Ariana",
+    "description": "Residential calm near the capital with gardens, food spots, and access to craft communities.",
+    "hero_image": "assets/images/regions/ariana_hero.jpg",
+    "cover_image": "assets/images/regions/ariana_cover.jpg",
+    "latitude": 36.8663,
+    "longitude": 10.1647,
+    "featured_tags": [
+      "Family",
+      "Food",
+      "Craft"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000003",
+    "slug": "ben-arous",
+    "name": "Ben Arous",
+    "description": "A practical south-of-capital base with local cuisine, artisan clusters, and coastal access.",
+    "hero_image": "assets/images/regions/ben-arous_hero.jpg",
+    "cover_image": "assets/images/regions/ben-arous_cover.jpg",
+    "latitude": 36.7531,
+    "longitude": 10.2189,
+    "featured_tags": [
+      "Local life",
+      "Cuisine",
+      "Access"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000004",
+    "slug": "manouba",
+    "name": "Manouba",
+    "description": "Green pockets, heritage edges, and community-led addresses close to Tunis.",
+    "hero_image": "assets/images/regions/manouba_hero.jpg",
+    "cover_image": "assets/images/regions/manouba_cover.jpg",
+    "latitude": 36.8081,
+    "longitude": 10.0963,
+    "featured_tags": [
+      "Heritage",
+      "Gardens",
+      "Slow travel"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000005",
+    "slug": "nabeul",
+    "name": "Nabeul",
+    "description": "Cap Bon ceramics, beaches, citrus notes, and easy seaside escapes.",
+    "hero_image": "assets/images/regions/nabeul_hero.jpg",
+    "cover_image": "assets/images/regions/nabeul_cover.jpg",
+    "latitude": 36.451,
+    "longitude": 10.7361,
+    "featured_tags": [
+      "Coast",
+      "Ceramics",
+      "Cuisine"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000006",
+    "slug": "zaghouan",
+    "name": "Zaghouan",
+    "description": "Mountain views, Roman heritage, and fresh-air routes just inland from the coast.",
+    "hero_image": "assets/images/regions/zaghouan_hero.jpg",
+    "cover_image": "assets/images/regions/zaghouan_cover.jpg",
+    "latitude": 36.4029,
+    "longitude": 10.1429,
+    "featured_tags": [
+      "Mountains",
+      "Roman heritage",
+      "Hiking"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000007",
+    "slug": "bizerte",
+    "name": "Bizerte",
+    "description": "Northern sea light, medina charm, cliffs, lagoons, and seafood culture.",
+    "hero_image": "assets/images/regions/bizerte_hero.jpg",
+    "cover_image": "assets/images/regions/bizerte_cover.jpg",
+    "latitude": 37.2744,
+    "longitude": 9.8739,
+    "featured_tags": [
+      "Sea",
+      "Cliffs",
+      "Seafood"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000008",
+    "slug": "beja",
+    "name": "Beja",
+    "description": "Rolling farmland, village craft, and generous inland food traditions.",
+    "hero_image": "assets/images/regions/beja_hero.jpg",
+    "cover_image": "assets/images/regions/beja_cover.jpg",
+    "latitude": 36.7333,
+    "longitude": 9.1833,
+    "featured_tags": [
+      "Countryside",
+      "Food",
+      "Agritourism"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000009",
+    "slug": "jendouba",
+    "name": "Jendouba",
+    "description": "Forest edges, Roman heritage, waterfalls, and cool-climate nature breaks.",
+    "hero_image": "assets/images/regions/jendouba_hero.jpg",
+    "cover_image": "assets/images/regions/jendouba_cover.jpg",
+    "latitude": 36.5011,
+    "longitude": 8.7802,
+    "featured_tags": [
+      "Forests",
+      "Heritage",
+      "Nature"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000010",
+    "slug": "kef",
+    "name": "Kef",
+    "description": "Hilltop history, strong regional food, and heritage layers looking over the northwest.",
+    "hero_image": "assets/images/regions/kef_hero.jpg",
+    "cover_image": "assets/images/regions/kef_cover.jpg",
+    "latitude": 36.1742,
+    "longitude": 8.7049,
+    "featured_tags": [
+      "Hill town",
+      "History",
+      "Food"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000011",
+    "slug": "siliana",
+    "name": "Siliana",
+    "description": "Rural calm, rocky panoramas, and community-driven craft and nature experiences.",
+    "hero_image": "assets/images/regions/siliana_hero.jpg",
+    "cover_image": "assets/images/regions/siliana_cover.jpg",
+    "latitude": 36.0833,
+    "longitude": 9.3667,
+    "featured_tags": [
+      "Panorama",
+      "Craft",
+      "Slow routes"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000012",
+    "slug": "sousse",
+    "name": "Sousse",
+    "description": "Beach city rhythm, heritage core, resorts, and lively dining scenes.",
+    "hero_image": "assets/images/regions/sousse_hero.jpg",
+    "cover_image": "assets/images/regions/sousse_cover.jpg",
+    "latitude": 35.8245,
+    "longitude": 10.6346,
+    "featured_tags": [
+      "Beach",
+      "Nightlife",
+      "Heritage"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000013",
+    "slug": "monastir",
+    "name": "Monastir",
+    "description": "Calm waterfront stays, ribat heritage, and polished coastal escapes.",
+    "hero_image": "assets/images/regions/monastir_hero.jpg",
+    "cover_image": "assets/images/regions/monastir_cover.jpg",
+    "latitude": 35.7643,
+    "longitude": 10.8113,
+    "featured_tags": [
+      "Waterfront",
+      "Culture",
+      "Relax"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000014",
+    "slug": "mahdia",
+    "name": "Mahdia",
+    "description": "Soft sea colors, fishing heritage, artisan detail, and low-key luxury.",
+    "hero_image": "assets/images/regions/mahdia_hero.jpg",
+    "cover_image": "assets/images/regions/mahdia_cover.jpg",
+    "latitude": 35.5047,
+    "longitude": 11.0622,
+    "featured_tags": [
+      "Sea",
+      "Craft",
+      "Slow luxury"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000015",
+    "slug": "sfax",
+    "name": "Sfax",
+    "description": "Business energy, strong food identity, island gateways, and artisanal know-how.",
+    "hero_image": "assets/images/regions/sfax_hero.jpg",
+    "cover_image": "assets/images/regions/sfax_cover.jpg",
+    "latitude": 34.7406,
+    "longitude": 10.7603,
+    "featured_tags": [
+      "Business",
+      "Food",
+      "Islands"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000016",
+    "slug": "kairouan",
+    "name": "Kairouan",
+    "description": "Sacred heritage, medina craftsmanship, and deep-rooted culinary traditions.",
+    "hero_image": "assets/images/regions/kairouan_hero.jpg",
+    "cover_image": "assets/images/regions/kairouan_cover.jpg",
+    "latitude": 35.6781,
+    "longitude": 10.0963,
+    "featured_tags": [
+      "Sacred heritage",
+      "Craft",
+      "Cuisine"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000017",
+    "slug": "kasserine",
+    "name": "Kasserine",
+    "description": "Mountain energy, national park edges, and active outdoor escapes.",
+    "hero_image": "assets/images/regions/kasserine_hero.jpg",
+    "cover_image": "assets/images/regions/kasserine_cover.jpg",
+    "latitude": 35.1676,
+    "longitude": 8.8365,
+    "featured_tags": [
+      "Adventure",
+      "Mountains",
+      "Nature"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000018",
+    "slug": "sidi-bouzid",
+    "name": "Sidi Bouzid",
+    "description": "Authentic inland life, farming roots, and practical base camps for local discovery.",
+    "hero_image": "assets/images/regions/sidi-bouzid_hero.jpg",
+    "cover_image": "assets/images/regions/sidi-bouzid_cover.jpg",
+    "latitude": 35.0382,
+    "longitude": 9.4858,
+    "featured_tags": [
+      "Rural life",
+      "Food",
+      "Community"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000019",
+    "slug": "gabes",
+    "name": "Gabes",
+    "description": "Oasis-meets-sea landscapes with date culture, local markets, and southern routes.",
+    "hero_image": "assets/images/regions/gabes_hero.jpg",
+    "cover_image": "assets/images/regions/gabes_cover.jpg",
+    "latitude": 33.8815,
+    "longitude": 10.0982,
+    "featured_tags": [
+      "Oasis",
+      "Markets",
+      "Sea"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000020",
+    "slug": "medenine",
+    "name": "Medenine",
+    "description": "Gateway to ksour villages, island departures, and south-bound cultural routes.",
+    "hero_image": "assets/images/regions/medenine_hero.jpg",
+    "cover_image": "assets/images/regions/medenine_cover.jpg",
+    "latitude": 33.3549,
+    "longitude": 10.5055,
+    "featured_tags": [
+      "Ksour",
+      "Islands",
+      "Culture"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000021",
+    "slug": "tataouine",
+    "name": "Tataouine",
+    "description": "Dramatic desert architecture, troglodyte landscapes, and iconic southern adventure.",
+    "hero_image": "assets/images/regions/tataouine_hero.jpg",
+    "cover_image": "assets/images/regions/tataouine_cover.jpg",
+    "latitude": 32.9297,
+    "longitude": 10.4518,
+    "featured_tags": [
+      "Desert",
+      "Ksour",
+      "Adventure"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000022",
+    "slug": "gafsa",
+    "name": "Gafsa",
+    "description": "Historic oasis gateway with rugged scenery and restorative inland routes.",
+    "hero_image": "assets/images/regions/gafsa_hero.jpg",
+    "cover_image": "assets/images/regions/gafsa_cover.jpg",
+    "latitude": 34.425,
+    "longitude": 8.7842,
+    "featured_tags": [
+      "Oasis",
+      "History",
+      "Nature"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000023",
+    "slug": "tozeur",
+    "name": "Tozeur",
+    "description": "Palm groves, desert cinema landscapes, and premium oasis stays.",
+    "hero_image": "assets/images/regions/tozeur_hero.jpg",
+    "cover_image": "assets/images/regions/tozeur_cover.jpg",
+    "latitude": 33.9197,
+    "longitude": 8.1335,
+    "featured_tags": [
+      "Oasis",
+      "Desert",
+      "Cinema"
+    ]
+  },
+  {
+    "id": "20000000-0000-0000-0000-000000000024",
+    "slug": "kebili",
+    "name": "Kebili",
+    "description": "Sahara threshold, dunes, oasis routes, and wide-open adventure design.",
+    "hero_image": "assets/images/regions/kebili_hero.jpg",
+    "cover_image": "assets/images/regions/kebili_cover.jpg",
+    "latitude": 33.7044,
+    "longitude": 8.969,
+    "featured_tags": [
+      "Sahara",
+      "Dunes",
+      "Adventure"
+    ]
+  }
+]

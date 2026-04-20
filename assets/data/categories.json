@@ -1,0 +1,58 @@
+[
+  {
+    "id": "10000000-0000-0000-0000-000000000001",
+    "slug": "accommodations",
+    "name": "Stays",
+    "icon_name": "hotel",
+    "color_hex": "1458A8",
+    "featured_theme": "heritage"
+  },
+  {
+    "id": "10000000-0000-0000-0000-000000000002",
+    "slug": "restaurants",
+    "name": "Restaurants",
+    "icon_name": "restaurant",
+    "color_hex": "C36B43",
+    "featured_theme": "culinary"
+  },
+  {
+    "id": "10000000-0000-0000-0000-000000000003",
+    "slug": "artisans",
+    "name": "Artisans",
+    "icon_name": "storefront",
+    "color_hex": "9D6A3E",
+    "featured_theme": "artisan"
+  },
+  {
+    "id": "10000000-0000-0000-0000-000000000004",
+    "slug": "activities",
+    "name": "Activities",
+    "icon_name": "directions_bike",
+    "color_hex": "738D39",
+    "featured_theme": "adventure"
+  },
+  {
+    "id": "10000000-0000-0000-0000-000000000005",
+    "slug": "museums",
+    "name": "Museums",
+    "icon_name": "museum",
+    "color_hex": "0D3C79",
+    "featured_theme": "heritage"
+  },
+  {
+    "id": "10000000-0000-0000-0000-000000000006",
+    "slug": "nature-spots",
+    "name": "Nature Spots",
+    "icon_name": "landscape",
+    "color_hex": "738D39",
+    "featured_theme": "nature"
+  },
+  {
+    "id": "10000000-0000-0000-0000-000000000007",
+    "slug": "transport",
+    "name": "Transport",
+    "icon_name": "directions_car",
+    "color_hex": "2B8FA3",
+    "featured_theme": "cycling"
+  }
+]
