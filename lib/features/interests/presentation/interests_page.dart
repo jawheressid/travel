@@ -184,6 +184,9 @@ class _InterestsPageState extends ConsumerState<InterestsPage> {
                   ),
                   const SizedBox(width: 12),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(0, 56),
+                    ),
                     onPressed: _continue,
                     child: const Text('Continue'),
                   ),

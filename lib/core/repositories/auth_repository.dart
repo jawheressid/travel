@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
@@ -21,6 +22,23 @@ class AuthRepository {
   final SharedPreferences _preferences;
   final SupabaseClient? _supabaseClient;
   final Uuid _uuid = const Uuid();
+  bool _isSigningUp = false;
+
+  bool _isCycleError(Object error) {
+    final type = error.runtimeType.toString().toLowerCase();
+    final text = error.toString().toLowerCase();
+    return type.contains('circular') ||
+        type.contains('cycle') ||
+        text.contains('circular') ||
+        text.contains('cycle');
+  }
+
+  void _debugLog(String message) {
+    if (!kDebugMode) {
+      return;
+    }
+    debugPrint('[AuthRepository] $message');
+  }
 
   Future<SessionState> restoreSession({required bool isSupabaseEnabled}) async {
     if (_supabaseClient != null && _supabaseClient!.auth.currentUser != null) {
@@ -76,34 +94,64 @@ class AuthRepository {
     required String password,
     required bool isSupabaseEnabled,
   }) async {
-    if (_supabaseClient != null) {
-      final response = await _supabaseClient!.auth.signUp(
-        email: email,
-        password: password,
-        data: {'full_name': fullName},
-      );
-      final userId = response.user?.id ?? _uuid.v4();
+    if (_isSigningUp) {
+      _debugLog('signUp rejected: previous signUp still running.');
+      throw StateError('A signup request is already in progress.');
+    }
 
-      final profile = UserProfile(id: userId, fullName: fullName, email: email);
+    _isSigningUp = true;
+    _debugLog('signUp started (supabaseEnabled=$isSupabaseEnabled, email=$email)');
+    try {
+      if (_supabaseClient != null) {
+        _debugLog('signUp using Supabase auth.signUp');
+        final response = await _supabaseClient!.auth.signUp(
+          email: email,
+          password: password,
+          data: {'full_name': fullName},
+        );
+        final userId = response.user?.id ?? _uuid.v4();
 
+        final profile = UserProfile(
+          id: userId,
+          fullName: fullName,
+          email: email,
+        );
+
+        final state = SessionState(
+          hasSeenOnboarding: true,
+          isSupabaseEnabled: isSupabaseEnabled,
+          user: profile,
+        );
+        await _persistSession(state);
+        _debugLog('signUp completed via Supabase (userId=$userId)');
+        return state;
+      }
+
+      _debugLog('signUp using local demo mode');
       final state = SessionState(
         hasSeenOnboarding: true,
         isSupabaseEnabled: isSupabaseEnabled,
-        user: profile,
+        user: UserProfile(id: _uuid.v4(), fullName: fullName, email: email),
       );
+
+      await _preferences.setString(_demoPasswordKey, password);
       await _persistSession(state);
+      _debugLog('signUp completed in demo mode');
       return state;
+    } catch (error, stackTrace) {
+      _debugLog('signUp failed with ${error.runtimeType}: $error');
+      debugPrintStack(stackTrace: stackTrace);
+      if (_isCycleError(error)) {
+        _debugLog(
+          'Potential provider dependency cycle detected during signUp. '
+          'Check provider graph around session and user-scoped providers.',
+        );
+      }
+      rethrow;
+    } finally {
+      _isSigningUp = false;
+      _debugLog('signUp finished');
     }
-
-    final state = SessionState(
-      hasSeenOnboarding: true,
-      isSupabaseEnabled: isSupabaseEnabled,
-      user: UserProfile(id: _uuid.v4(), fullName: fullName, email: email),
-    );
-
-    await _preferences.setString(_demoPasswordKey, password);
-    await _persistSession(state);
-    return state;
   }
 
   Future<SessionState> signIn({

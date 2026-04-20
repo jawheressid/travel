@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,6 +25,30 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   bool _obscure = true;
   bool _isSubmitting = false;
 
+  bool _isCycleError(Object error) {
+    final type = error.runtimeType.toString().toLowerCase();
+    final text = error.toString().toLowerCase();
+    return type.contains('circular') ||
+        type.contains('cycle') ||
+        text.contains('circular') ||
+        text.contains('cycle');
+  }
+
+  String _toReadableError(Object error) {
+    if (_isCycleError(error)) {
+      return 'Circular dependency detected during signup. Check debug logs for provider chain details.';
+    }
+
+    final raw = error.toString();
+    if (raw.startsWith('Exception: ')) {
+      return raw.replaceFirst('Exception: ', '');
+    }
+    if (raw.startsWith('AuthException: ')) {
+      return raw.replaceFirst('AuthException: ', '');
+    }
+    return raw;
+  }
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -37,26 +62,47 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
       return;
     }
 
+    final fullName = _nameController.text.trim();
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
     setState(() => _isSubmitting = true);
     var shouldNavigate = false;
+    final startedAt = DateTime.now();
+
+    if (kDebugMode) {
+      debugPrint(
+        '[SignUpPage] submit started at ${startedAt.toIso8601String()} '
+        '(email=$email, fullNameLength=${fullName.length}, passwordLength=${password.length})',
+      );
+    }
+
     try {
       await ref
           .read(sessionControllerProvider.notifier)
           .signUp(
-            fullName: _nameController.text.trim(),
-            email: _emailController.text.trim(),
-            password: _passwordController.text.trim(),
+            fullName: fullName,
+            email: email,
+            password: password,
           );
       shouldNavigate = true;
-    } catch (error) {
+    } catch (error, stackTrace) {
+      if (kDebugMode) {
+        debugPrint('[SignUpPage] submit failed with ${error.runtimeType}: $error');
+        debugPrintStack(stackTrace: stackTrace);
+      }
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text(error.toString())));
+        ).showSnackBar(SnackBar(content: Text(_toReadableError(error))));
       }
     } finally {
       if (mounted) {
         setState(() => _isSubmitting = false);
+      }
+      if (kDebugMode) {
+        final elapsedMs = DateTime.now().difference(startedAt).inMilliseconds;
+        debugPrint('[SignUpPage] submit finished (elapsed=${elapsedMs}ms, success=$shouldNavigate)');
       }
     }
 

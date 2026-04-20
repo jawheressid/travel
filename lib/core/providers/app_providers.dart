@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
@@ -106,8 +107,66 @@ final paymentReceiptProvider = StateProvider<PaymentRecord?>((ref) => null);
 final checkoutPromoCodeProvider = StateProvider<String>((ref) => '');
 
 class SessionController extends AsyncNotifier<SessionState> {
+  static const _authLogTag = '[AuthFlow]';
+
+  bool _isSessionMutationInProgress = false;
+
+  void _debugLog(String message) {
+    if (!kDebugMode) {
+      return;
+    }
+    debugPrint('$_authLogTag $message');
+  }
+
+  bool _isCycleError(Object error) {
+    final type = error.runtimeType.toString().toLowerCase();
+    final text = error.toString().toLowerCase();
+    return type.contains('circular') ||
+        type.contains('cycle') ||
+        text.contains('circular') ||
+        text.contains('cycle');
+  }
+
+  void _invalidateUserScopedProviders() {
+    ref.invalidate(favoritesControllerProvider);
+    ref.invalidate(itinerariesControllerProvider);
+    ref.invalidate(bookingsControllerProvider);
+  }
+
+  Future<T> _guardSessionMutation<T>({
+    required String action,
+    required Future<T> Function() run,
+  }) async {
+    if (_isSessionMutationInProgress) {
+      _debugLog('$action rejected: another auth mutation is already running.');
+      throw StateError(
+        'Another authentication action is running. Please wait and retry.',
+      );
+    }
+
+    _isSessionMutationInProgress = true;
+    _debugLog('$action started');
+    try {
+      return await run();
+    } catch (error, stackTrace) {
+      _debugLog('$action failed with ${error.runtimeType}: $error');
+      debugPrintStack(stackTrace: stackTrace);
+      if (_isCycleError(error)) {
+        _debugLog(
+          '$action detected a cyclic provider dependency. '
+          'Inspect providers that read sessionControllerProvider during auth writes.',
+        );
+      }
+      rethrow;
+    } finally {
+      _isSessionMutationInProgress = false;
+      _debugLog('$action finished');
+    }
+  }
+
   @override
   Future<SessionState> build() {
+    _debugLog('restoreSession requested');
     final repository = ref.read(authRepositoryProvider);
     final isEnabled = ref.read(environmentProvider).isSupabaseConfigured;
     return repository.restoreSession(isSupabaseEnabled: isEnabled);
@@ -118,44 +177,68 @@ class SessionController extends AsyncNotifier<SessionState> {
     required String email,
     required String password,
   }) async {
-    state = const AsyncLoading();
-    final result = await ref
-        .read(authRepositoryProvider)
-        .signUp(
-          fullName: fullName,
-          email: email,
-          password: password,
-          isSupabaseEnabled: ref.read(environmentProvider).isSupabaseConfigured,
-        );
-    state = AsyncData(result);
-    return result;
+    return _guardSessionMutation(
+      action: 'signUp',
+      run: () async {
+        state = const AsyncLoading();
+        final result = await ref
+            .read(authRepositoryProvider)
+            .signUp(
+              fullName: fullName,
+              email: email,
+              password: password,
+              isSupabaseEnabled: ref
+                  .read(environmentProvider)
+                  .isSupabaseConfigured,
+            );
+        state = AsyncData(result);
+        _invalidateUserScopedProviders();
+        return result;
+      },
+    );
   }
 
   Future<SessionState> signIn({
     required String email,
     required String password,
   }) async {
-    state = const AsyncLoading();
-    final result = await ref
-        .read(authRepositoryProvider)
-        .signIn(
-          email: email,
-          password: password,
-          isSupabaseEnabled: ref.read(environmentProvider).isSupabaseConfigured,
-        );
-    state = AsyncData(result);
-    return result;
+    return _guardSessionMutation(
+      action: 'signIn',
+      run: () async {
+        state = const AsyncLoading();
+        final result = await ref
+            .read(authRepositoryProvider)
+            .signIn(
+              email: email,
+              password: password,
+              isSupabaseEnabled: ref
+                  .read(environmentProvider)
+                  .isSupabaseConfigured,
+            );
+        state = AsyncData(result);
+        _invalidateUserScopedProviders();
+        return result;
+      },
+    );
   }
 
   Future<SessionState> signInAsGuest() async {
-    state = const AsyncLoading();
-    final result = await ref
-        .read(authRepositoryProvider)
-        .signInAsGuest(
-          isSupabaseEnabled: ref.read(environmentProvider).isSupabaseConfigured,
-        );
-    state = AsyncData(result);
-    return result;
+    return _guardSessionMutation(
+      action: 'signInAsGuest',
+      run: () async {
+        state = const AsyncLoading();
+        final result = await ref
+            .read(authRepositoryProvider)
+            .signInAsGuest(
+              isSupabaseEnabled: ref
+                  .read(environmentProvider)
+                  .isSupabaseConfigured,
+            );
+        state = AsyncData(result);
+        _invalidateUserScopedProviders();
+        return result;
+      },
+    );
   }
 
   Future<void> sendResetPassword(String email) {
@@ -176,31 +259,45 @@ class SessionController extends AsyncNotifier<SessionState> {
   }
 
   Future<SessionState> updateInterests(List<TravelTheme> interests) async {
-    final current = state.valueOrNull ?? await future;
-    final updated = await ref
-        .read(authRepositoryProvider)
-        .updateInterests(current, interests);
-    state = AsyncData(updated);
-    return updated;
+    return _guardSessionMutation(
+      action: 'updateInterests',
+      run: () async {
+        final current = state.valueOrNull ?? await future;
+        final updated = await ref
+            .read(authRepositoryProvider)
+            .updateInterests(current, interests);
+        state = AsyncData(updated);
+        _invalidateUserScopedProviders();
+        return updated;
+      },
+    );
   }
 
   Future<void> signOut() async {
-    final updated = await ref
-        .read(authRepositoryProvider)
-        .signOut(
-          isSupabaseEnabled: ref.read(environmentProvider).isSupabaseConfigured,
-        );
-    ref.read(cartControllerProvider.notifier).clear();
-    ref.read(paymentReceiptProvider.notifier).state = null;
-    ref.read(selectedItineraryProvider.notifier).state = null;
-    state = AsyncData(updated);
+    await _guardSessionMutation(
+      action: 'signOut',
+      run: () async {
+        final updated = await ref
+            .read(authRepositoryProvider)
+            .signOut(
+              isSupabaseEnabled: ref
+                  .read(environmentProvider)
+                  .isSupabaseConfigured,
+            );
+        ref.read(cartControllerProvider.notifier).clear();
+        ref.read(paymentReceiptProvider.notifier).state = null;
+        ref.read(selectedItineraryProvider.notifier).state = null;
+        state = AsyncData(updated);
+        _invalidateUserScopedProviders();
+      },
+    );
   }
 }
 
 class FavoritesController extends AsyncNotifier<Set<String>> {
   @override
   Future<Set<String>> build() async {
-    final session = await ref.watch(sessionControllerProvider.future);
+    final session = await ref.read(sessionControllerProvider.future);
     final user = session.user;
     if (user == null) {
       return {};
@@ -227,7 +324,7 @@ class FavoritesController extends AsyncNotifier<Set<String>> {
 class ItinerariesController extends AsyncNotifier<List<Itinerary>> {
   @override
   Future<List<Itinerary>> build() async {
-    final session = await ref.watch(sessionControllerProvider.future);
+    final session = await ref.read(sessionControllerProvider.future);
     final user = session.user;
     if (user == null) {
       return [];
@@ -264,7 +361,7 @@ class BookingsController extends AsyncNotifier<List<Booking>> {
 
   @override
   Future<List<Booking>> build() async {
-    final session = await ref.watch(sessionControllerProvider.future);
+    final session = await ref.read(sessionControllerProvider.future);
     final user = session.user;
     if (user == null) {
       return [];
