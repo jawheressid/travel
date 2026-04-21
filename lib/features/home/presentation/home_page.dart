@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/data/curated_content.dart';
 import '../../../core/enums/app_enums.dart';
 import '../../../core/providers/app_providers.dart';
 import '../../../core/utils/ui_helpers.dart';
@@ -65,7 +66,10 @@ class _HomePageState extends ConsumerState<HomePage> {
           value: catalogAsync,
           loadingMessage: 'Loading Tunisia highlights...',
           builder: (catalog) {
-            final featuredGovernorates = catalog.governorates.take(4).toList();
+            final featuredGovernorates = catalog.curatedGovernorates;
+            final inspirationGovernorates = catalog.inspirationGovernorates
+                .take(8)
+                .toList();
             final stays = catalog.places
                 .where((place) => place.type == PlaceType.accommodation)
                 .take(6)
@@ -356,9 +360,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                   _BlueCalloutCard(onTap: () => context.push('/planner')),
                   const SizedBox(height: 26),
                   SectionHeader(
-                    title: 'Featured governorates',
+                    title: 'Launch regions',
                     subtitle:
-                        'Explore Tunisia through curated regions and local moods.',
+                        'Interactive exploration is focused on Bizerte, Le Kef, and Tozeur for this phase.',
                     actionLabel: 'See all',
                     onAction: () => context.go('/explore'),
                   ),
@@ -424,6 +428,28 @@ class _HomePageState extends ConsumerState<HomePage> {
                               ],
                             ),
                           ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 26),
+                  const SectionHeader(
+                    title: 'Photo-only inspiration',
+                    subtitle:
+                        'Other Tunisian regions stay visible as inspiration photos while the launch stays focused on three regions.',
+                  ),
+                  const SizedBox(height: 14),
+                  SizedBox(
+                    height: 184,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: inspirationGovernorates.length,
+                      separatorBuilder: (_, _) => const SizedBox(width: 12),
+                      itemBuilder: (context, index) {
+                        final governorate = inspirationGovernorates[index];
+                        return _PhotoOnlyGovernorateCard(
+                          name: governorate.name,
+                          imagePath: governorate.heroImage,
                         );
                       },
                     ),
@@ -530,48 +556,105 @@ class _BlueCalloutCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(30),
       onTap: onTap,
       child: Ink(
-        padding: const EdgeInsets.all(24),
+        height: 300,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          color: AppColors.mediterraneanBlue,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.deepBlue.withValues(alpha: 0.18),
+              blurRadius: 28,
+              offset: const Offset(0, 18),
+            ),
+          ],
         ),
         child: Stack(
+          fit: StackFit.expand,
           children: [
-            Positioned.fill(
-              child: IgnorePointer(
-                child: CustomPaint(painter: _CardGridPainter()),
+            const SafeAssetImage(
+              path: 'assets/images/regions/tozeur_hero.jpg',
+              title: 'Custom travel planner',
+              borderRadius: 30,
+            ),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.deepBlue.withValues(alpha: 0.2),
+                    AppColors.deepBlue.withValues(alpha: 0.76),
+                    Colors.black.withValues(alpha: 0.82),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Ready to design your\nbespoke Tunisian escape?',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            Positioned(
+              top: 18,
+              left: 18,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.14),
+                  borderRadius: BorderRadius.circular(999),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.2),
+                  ),
+                ),
+                child: Text(
+                  'Multi-region planner',
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: Colors.white,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  'Build a stay that balances local value, scenery, and specific activities you care about.',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Colors.white.withValues(alpha: 0.94),
+              ),
+            ),
+            Positioned(
+              left: 22,
+              right: 22,
+              bottom: 22,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Design a modern Tunisia program',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      height: 1.05,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 18),
-                OutlinedButton(
-                  onPressed: onTap,
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: AppColors.deepBlue,
-                    side: BorderSide.none,
+                  const SizedBox(height: 10),
+                  Text(
+                    'Combine Bizerte, Le Kef, and Tozeur in one route with the exact leisure mix you want.',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Colors.white.withValues(alpha: 0.92),
+                      height: 1.35,
+                    ),
                   ),
-                  child: const Text('Create My Dream Stay'),
-                ),
-              ],
+                  const SizedBox(height: 18),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: onTap,
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(56),
+                        backgroundColor: Colors.white,
+                        foregroundColor: AppColors.deepBlue,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                      ),
+                      child: const Text('Build My Program'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -580,22 +663,50 @@ class _BlueCalloutCard extends StatelessWidget {
   }
 }
 
-class _CardGridPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = Colors.white.withValues(alpha: 0.14)
-      ..strokeWidth = 1;
+class _PhotoOnlyGovernorateCard extends StatelessWidget {
+  const _PhotoOnlyGovernorateCard({
+    required this.name,
+    required this.imagePath,
+  });
 
-    const spacing = 28.0;
-    for (double x = 0; x < size.width; x += spacing) {
-      canvas.drawLine(Offset(x, 0), Offset(x, size.height), paint);
-    }
-    for (double y = 0; y < size.height; y += spacing) {
-      canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
-    }
+  final String name;
+  final String imagePath;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 220,
+      child: Stack(
+        children: [
+          SafeAssetImage(
+            path: imagePath,
+            title: name,
+            height: 184,
+            borderRadius: 26,
+          ),
+          Positioned(
+            left: 16,
+            top: 16,
+            child: BrandBadge(
+              label: 'Photo only',
+              background: Colors.white.withValues(alpha: 0.92),
+              foreground: AppColors.deepBlue,
+            ),
+          ),
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: 16,
+            child: Text(
+              name,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

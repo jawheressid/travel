@@ -11,7 +11,9 @@ import '../../../shared/widgets/safe_asset_image.dart';
 import '../../../theme/app_colors.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
-  const SignUpPage({super.key});
+  const SignUpPage({super.key, this.redirectTo = '/interests'});
+
+  final String redirectTo;
 
   @override
   ConsumerState<SignUpPage> createState() => _SignUpPageState();
@@ -66,6 +68,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
+    FocusManager.instance.primaryFocus?.unfocus();
     setState(() => _isSubmitting = true);
     var shouldNavigate = false;
     final startedAt = DateTime.now();
@@ -80,15 +83,13 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     try {
       await ref
           .read(sessionControllerProvider.notifier)
-          .signUp(
-            fullName: fullName,
-            email: email,
-            password: password,
-          );
+          .signUp(fullName: fullName, email: email, password: password);
       shouldNavigate = true;
     } catch (error, stackTrace) {
       if (kDebugMode) {
-        debugPrint('[SignUpPage] submit failed with ${error.runtimeType}: $error');
+        debugPrint(
+          '[SignUpPage] submit failed with ${error.runtimeType}: $error',
+        );
         debugPrintStack(stackTrace: stackTrace);
       }
       if (mounted) {
@@ -102,14 +103,16 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
       }
       if (kDebugMode) {
         final elapsedMs = DateTime.now().difference(startedAt).inMilliseconds;
-        debugPrint('[SignUpPage] submit finished (elapsed=${elapsedMs}ms, success=$shouldNavigate)');
+        debugPrint(
+          '[SignUpPage] submit finished (elapsed=${elapsedMs}ms, success=$shouldNavigate)',
+        );
       }
     }
 
     if (shouldNavigate && mounted) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
-          context.go('/interests');
+          context.go(widget.redirectTo);
         }
       });
     }
@@ -241,7 +244,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                             const SizedBox(height: 14),
                             Center(
                               child: Text(
-                                'After signup, the app will take you directly to interests selection.',
+                                'After signup, the app will take you to the next step.',
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/data/curated_content.dart';
 import '../../../core/enums/app_enums.dart';
 import '../../../core/models/planner_form.dart';
 import '../../../core/providers/app_providers.dart';
@@ -33,6 +34,7 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
   TravelTheme _travelTheme = TravelTheme.heritage;
   ActivityLevel _activityLevel = ActivityLevel.medium;
   final Set<String> _selectedRegions = {};
+  final Set<String> _selectedActivities = {};
   bool _isGenerating = false;
 
   Future<void> _pickDates() async {
@@ -62,17 +64,43 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
     );
 
     setState(() => _isGenerating = true);
-    final itinerary = ref
-        .read(recommendationServiceProvider)
-        .generate(
-          form: plannerForm,
-          catalog: catalog,
-          userId: session.user?.id,
+    try {
+      final itinerary = ref
+          .read(recommendationServiceProvider)
+          .generate(
+            form: plannerForm,
+            catalog: catalog,
+            userId: session.user?.id,
+            selectedActivities: _selectedActivities.toList(),
+          );
+
+      if (itinerary.items.isEmpty) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'No matching program was found. Increase the budget or add another region/leisure.',
+              ),
+            ),
+          );
+        }
+        return;
+      }
+
+      await ref.read(itinerariesControllerProvider.notifier).save(itinerary);
+      if (mounted) {
+        context.go('/itinerary');
+      }
+    } catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Trip generation failed: $error')),
         );
-    await ref.read(itinerariesControllerProvider.notifier).save(itinerary);
-    setState(() => _isGenerating = false);
-    if (mounted) {
-      context.go('/itinerary');
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isGenerating = false);
+      }
     }
   }
 
@@ -87,6 +115,14 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
           child: AppAsyncValueWidget(
             value: catalogAsync,
             builder: (catalog) {
+              final curatedGovernorates = catalog.curatedGovernorates;
+              final selectedRegionNames = curatedGovernorates
+                  .where(
+                    (governorate) => _selectedRegions.contains(governorate.id),
+                  )
+                  .map((governorate) => governorate.name)
+                  .toList(growable: false);
+
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +165,7 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Craft a Tunisia-first itinerary with realistic prices, local impact, and bookable recommendations.',
+                            'Build an adapted program across Bizerte, Le Kef, and Tozeur with realistic prices, local impact, and multi-region routing.',
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           const SizedBox(height: 18),
@@ -254,6 +290,38 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
                           ),
                           const SizedBox(height: 18),
                           Text(
+                            'Add another leisure',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Mix more than one leisure so the generated program can combine desert, sea, heritage, birdwatching, wellness, or other specific interests.',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          const SizedBox(height: 10),
+                          Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            children: curatedLeisureTags.map((activity) {
+                              final selected = _selectedActivities.contains(
+                                activity,
+                              );
+                              return FilterChip(
+                                label: Text(activity),
+                                selected: selected,
+                                selectedColor: AppColors.mistBlue,
+                                onSelected: (_) {
+                                  setState(() {
+                                    selected
+                                        ? _selectedActivities.remove(activity)
+                                        : _selectedActivities.add(activity);
+                                  });
+                                },
+                              );
+                            }).toList(),
+                          ),
+                          const SizedBox(height: 18),
+                          Text(
                             'Activity level',
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
@@ -282,11 +350,16 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
                             'Preferred regions',
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Select one or several regions. The planner can now build the same program across more than one curated region.',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                           const SizedBox(height: 10),
                           Wrap(
                             spacing: 8,
                             runSpacing: 8,
-                            children: catalog.governorates.map((governorate) {
+                            children: curatedGovernorates.map((governorate) {
                               final selected = _selectedRegions.contains(
                                 governorate.id,
                               );
@@ -304,6 +377,11 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
                                 },
                               );
                             }).toList(),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Sensitive motorized offers and hunting-style activities stay off-catalog until partner validation and insurance checks are confirmed.',
+                            style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
                       ),
@@ -335,6 +413,26 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
                                   color: Colors.white.withValues(alpha: 0.94),
                                 ),
                           ),
+                          const SizedBox(height: 8),
+                          Text(
+                            selectedRegionNames.isEmpty
+                                ? 'Route mode: auto across Bizerte, Le Kef, and Tozeur.'
+                                : 'Route mode: ${selectedRegionNames.join(', ')}.',
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(
+                                  color: Colors.white.withValues(alpha: 0.9),
+                                ),
+                          ),
+                          if (_selectedActivities.isNotEmpty) ...[
+                            const SizedBox(height: 6),
+                            Text(
+                              'Extra leisure: ${_selectedActivities.join(', ')}',
+                              style: Theme.of(context).textTheme.bodySmall
+                                  ?.copyWith(
+                                    color: Colors.white.withValues(alpha: 0.88),
+                                  ),
+                            ),
+                          ],
                           const SizedBox(height: 18),
                           ElevatedButton(
                             onPressed: _isGenerating ? null : _generate,

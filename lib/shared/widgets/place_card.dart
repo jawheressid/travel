@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/enums/app_enums.dart';
 import '../../core/models/place.dart';
 import '../../core/utils/formatters.dart';
+import '../../theme/app_colors.dart';
 import 'rating_badge.dart';
 import 'safe_asset_image.dart';
 
@@ -60,6 +61,9 @@ class PlaceCard extends StatelessWidget {
                               isFavorite
                                   ? Icons.favorite_rounded
                                   : Icons.favorite_border_rounded,
+                              color: isFavorite
+                                  ? AppColors.danger
+                                  : AppColors.deepBlue,
                             ),
                           ),
                         ),

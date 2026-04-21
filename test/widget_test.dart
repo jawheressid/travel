@@ -42,50 +42,55 @@ void main() {
   });
 
   testWidgets('interests page lays out and continues to home', (tester) async {
-    SharedPreferences.setMockInitialValues({});
-    final preferences = await SharedPreferences.getInstance();
-    final bootstrap = AppBootstrap(
-      environment: const AppEnvironment(supabaseUrl: '', supabaseAnonKey: ''),
-      sharedPreferences: preferences,
-      supabaseClient: null,
-    );
+    final semantics = tester.ensureSemantics();
+    try {
+      SharedPreferences.setMockInitialValues({});
+      final preferences = await SharedPreferences.getInstance();
+      final bootstrap = AppBootstrap(
+        environment: const AppEnvironment(supabaseUrl: '', supabaseAnonKey: ''),
+        sharedPreferences: preferences,
+        supabaseClient: null,
+      );
 
-    final router = GoRouter(
-      initialLocation: '/interests',
-      routes: [
-        GoRoute(
-          path: '/interests',
-          builder: (context, state) => const InterestsPage(),
+      final router = GoRouter(
+        initialLocation: '/interests',
+        routes: [
+          GoRoute(
+            path: '/interests',
+            builder: (context, state) => const InterestsPage(),
+          ),
+          GoRoute(
+            path: '/home',
+            builder: (context, state) =>
+                const Scaffold(body: Center(child: Text('Home'))),
+          ),
+        ],
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [appBootstrapProvider.overrideWithValue(bootstrap)],
+          child: MaterialApp.router(routerConfig: router),
         ),
-        GoRoute(
-          path: '/home',
-          builder: (context, state) =>
-              const Scaffold(body: Center(child: Text('Home'))),
-        ),
-      ],
-    );
+      );
+      await tester.pumpAndSettle();
 
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [appBootstrapProvider.overrideWithValue(bootstrap)],
-        child: MaterialApp.router(routerConfig: router),
-      ),
-    );
-    await tester.pumpAndSettle();
+      expect(find.text('Personalize Your Journey'), findsOneWidget);
+      expect(tester.takeException(), isNull);
 
-    expect(find.text('Personalize Your Journey'), findsOneWidget);
-    expect(tester.takeException(), isNull);
+      await tester.tap(find.text('Horse Riding').last);
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isNull);
 
-    await tester.tap(find.text('Horse Riding').last);
-    await tester.pumpAndSettle();
-    expect(tester.takeException(), isNull);
+      await tester.scrollUntilVisible(find.text('Continue').last, 200);
+      await tester.tap(find.text('Continue').last);
+      await tester.pump();
+      await tester.pumpAndSettle();
 
-    await tester.scrollUntilVisible(find.text('Continue').last, 200);
-    await tester.tap(find.text('Continue').last);
-    await tester.pump();
-    await tester.pumpAndSettle();
-
-    expect(find.text('Home'), findsOneWidget);
-    expect(tester.takeException(), isNull);
+      expect(find.text('Home'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    } finally {
+      semantics.dispose();
+    }
   });
 }

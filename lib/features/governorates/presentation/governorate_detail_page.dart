@@ -33,6 +33,44 @@ class GovernorateDetailPage extends ConsumerWidget {
                 .where((place) => place.governorateId == governorate.id)
                 .toList();
 
+            if (places.isEmpty) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SafeAssetImage(
+                      path: governorate.coverImage,
+                      title: governorate.name,
+                      height: 260,
+                      borderRadius: 30,
+                    ),
+                    const SizedBox(height: 18),
+                    Text(
+                      governorate.name,
+                      style: Theme.of(context).textTheme.headlineMedium
+                          ?.copyWith(fontWeight: FontWeight.w800),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(governorate.description),
+                    const SizedBox(height: 18),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(color: AppColors.sandDark),
+                      ),
+                      child: const Text(
+                        'This governorate is currently shown as photo-only inspiration. Interactive content is active only for Bizerte, Le Kef, and Tozeur.',
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+
             List<Widget> buildSection(String title, PlaceType type) {
               final items = places
                   .where((place) => place.type == type)

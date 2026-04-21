@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/data/curated_content.dart';
 import '../../../core/providers/app_providers.dart';
 import '../../../shared/widgets/app_async_value_widget.dart';
+import '../../../shared/widgets/brand_badge.dart';
 import '../../../shared/widgets/safe_asset_image.dart';
 import '../../../shared/widgets/section_header.dart';
 
@@ -24,9 +26,9 @@ class _GovernoratesPageState extends ConsumerState<GovernoratesPage> {
     return SafeArea(
       child: AppAsyncValueWidget(
         value: catalogAsync,
-        loadingMessage: 'Loading all Tunisian governorates...',
+        loadingMessage: 'Loading launch regions...',
         builder: (catalog) {
-          final governorates = catalog.governorates.where((governorate) {
+          final governorates = catalog.curatedGovernorates.where((governorate) {
             return governorate.name.toLowerCase().contains(
                   _query.toLowerCase(),
                 ) ||
@@ -34,6 +36,9 @@ class _GovernoratesPageState extends ConsumerState<GovernoratesPage> {
                   _query.toLowerCase(),
                 );
           }).toList();
+          final inspirationGovernorates = catalog.inspirationGovernorates
+              .take(12)
+              .toList();
 
           return SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(20, 16, 20, 120),
@@ -41,9 +46,9 @@ class _GovernoratesPageState extends ConsumerState<GovernoratesPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SectionHeader(
-                  title: 'Explore Tunisia by governorate',
+                  title: 'Explore the 3 launch regions',
                   subtitle:
-                      '24 regions, each with stays, restaurants, artisans, museums, nature, and transport.',
+                      'Interactive discovery is currently focused on Bizerte, Le Kef, and Tozeur.',
                 ),
                 const SizedBox(height: 18),
                 const SafeAssetImage(
@@ -56,7 +61,7 @@ class _GovernoratesPageState extends ConsumerState<GovernoratesPage> {
                 TextField(
                   onChanged: (value) => setState(() => _query = value.trim()),
                   decoration: const InputDecoration(
-                    hintText: 'Search governorates',
+                    hintText: 'Search launch regions',
                     prefixIcon: Icon(Icons.search_rounded),
                   ),
                 ),
@@ -119,10 +124,80 @@ class _GovernoratesPageState extends ConsumerState<GovernoratesPage> {
                     );
                   },
                 ),
+                const SizedBox(height: 28),
+                const SectionHeader(
+                  title: 'Photo-only regions',
+                  subtitle:
+                      'The rest of Tunisia stays visible as inspiration photos while the active catalog remains limited to the launch regions.',
+                ),
+                const SizedBox(height: 14),
+                SizedBox(
+                  height: 184,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: inspirationGovernorates.length,
+                    separatorBuilder: (_, _) => const SizedBox(width: 12),
+                    itemBuilder: (context, index) {
+                      final governorate = inspirationGovernorates[index];
+                      return _PhotoOnlyGovernorateCard(
+                        name: governorate.name,
+                        imagePath: governorate.heroImage,
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _PhotoOnlyGovernorateCard extends StatelessWidget {
+  const _PhotoOnlyGovernorateCard({
+    required this.name,
+    required this.imagePath,
+  });
+
+  final String name;
+  final String imagePath;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 220,
+      child: Stack(
+        children: [
+          SafeAssetImage(
+            path: imagePath,
+            title: name,
+            height: 184,
+            borderRadius: 26,
+          ),
+          Positioned(
+            left: 16,
+            top: 16,
+            child: BrandBadge(
+              label: 'Photo only',
+              background: Colors.white.withValues(alpha: 0.92),
+              foreground: Colors.black87,
+            ),
+          ),
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: 16,
+            child: Text(
+              name,
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

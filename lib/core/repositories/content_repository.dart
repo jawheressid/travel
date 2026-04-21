@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:collection/collection.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../data/curated_content.dart';
 import '../models/app_banner.dart';
 import '../models/governorate.dart';
 import '../models/place.dart';
@@ -45,14 +46,14 @@ class ContentRepository {
             'catalog_banners',
             jsonEncode(catalog.banners.map((item) => item.toJson()).toList()),
           );
-          return catalog;
+          return applyCuratedContent(catalog);
         }
       }
     } catch (_) {
       // Local fallback is the primary offline path for the MVP.
     }
 
-    return TravelCatalog.fromSources(
+    final catalog = TravelCatalog.fromSources(
       governoratesJson: await _cacheService.loadJson(
         cacheKey: 'catalog_governorates',
         assetPath: 'assets/data/governorates.json',
@@ -70,6 +71,7 @@ class ContentRepository {
         assetPath: 'assets/data/banners.json',
       ),
     );
+    return applyCuratedContent(catalog);
   }
 
   Future<TravelCatalog> _loadFromSupabase() async {

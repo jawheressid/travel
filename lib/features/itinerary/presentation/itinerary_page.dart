@@ -49,6 +49,18 @@ class ItineraryPage extends ConsumerWidget {
                       ),
                     );
                   }
+                  if (itinerary.items.isEmpty) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 32),
+                      child: EmptyStateCard(
+                        title: 'No program generated',
+                        message:
+                            'The selected filters did not return enough places. Adjust the planner and try again.',
+                        actionLabel: 'Open planner',
+                        onAction: () => context.push('/planner'),
+                      ),
+                    );
+                  }
 
                   final grouped = <int, List<ItineraryItem>>{};
                   for (final item in itinerary.items) {
@@ -61,6 +73,24 @@ class ItineraryPage extends ConsumerWidget {
                   final heroGovernorate = catalog.governorates.firstWhere(
                     (governorate) => governorate.id == firstPlace.governorateId,
                   );
+                  final routeGovernorates = itinerary.items
+                      .map(
+                        (item) => catalog.places.firstWhere(
+                          (place) => place.id == item.placeId,
+                        ),
+                      )
+                      .map(
+                        (place) => catalog.governorates.firstWhere(
+                          (governorate) =>
+                              governorate.id == place.governorateId,
+                        ),
+                      )
+                      .fold<List<String>>(<String>[], (names, governorate) {
+                        if (!names.contains(governorate.name)) {
+                          names.add(governorate.name);
+                        }
+                        return names;
+                      });
                   final budgetByType = <PlaceType, double>{};
                   for (final item in itinerary.items) {
                     budgetByType.update(
@@ -108,7 +138,9 @@ class ItineraryPage extends ConsumerWidget {
                                   Wrap(
                                     spacing: 8,
                                     children: [
-                                      Chip(label: Text(heroGovernorate.name)),
+                                      ...routeGovernorates.map(
+                                        (name) => Chip(label: Text(name)),
+                                      ),
                                       Chip(label: Text(itinerary.theme.label)),
                                     ],
                                   ),
@@ -194,6 +226,10 @@ class ItineraryPage extends ConsumerWidget {
                                   _FactPill(
                                     label:
                                         'Artisans included: ${itinerary.artisansIncluded}',
+                                  ),
+                                  _FactPill(
+                                    label:
+                                        'Regions in route: ${routeGovernorates.length}',
                                   ),
                                 ],
                               ),
@@ -299,6 +335,13 @@ class ItineraryPage extends ConsumerWidget {
                                                           element.id ==
                                                           item.placeId,
                                                     );
+                                                final governorate = catalog
+                                                    .governorates
+                                                    .firstWhere(
+                                                      (element) =>
+                                                          element.id ==
+                                                          place.governorateId,
+                                                    );
                                                 return Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -345,6 +388,19 @@ class ItineraryPage extends ConsumerWidget {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w700,
+                                                                  ),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 4,
+                                                            ),
+                                                            Text(
+                                                              governorate.name,
+                                                              style: Theme.of(context)
+                                                                  .textTheme
+                                                                  .bodySmall
+                                                                  ?.copyWith(
+                                                                    color: AppColors
+                                                                        .mediterraneanBlue,
                                                                   ),
                                                             ),
                                                             const SizedBox(
