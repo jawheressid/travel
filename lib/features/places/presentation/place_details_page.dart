@@ -6,6 +6,8 @@ import '../../../core/enums/app_enums.dart';
 import '../../../core/providers/app_providers.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../shared/widgets/app_async_value_widget.dart';
+import '../../../shared/widgets/brand_background.dart';
+import '../../../shared/widgets/brand_panel.dart';
 import '../../../shared/widgets/place_card.dart';
 import '../../../shared/widgets/rating_badge.dart';
 import '../../../shared/widgets/safe_asset_image.dart';
@@ -36,8 +38,10 @@ class _PlaceDetailsPageState extends ConsumerState<PlaceDetailsPage> {
     final favorites = ref.watch(favoritesControllerProvider).valueOrNull ?? {};
 
     return Scaffold(
-      body: SafeArea(
-        child: AppAsyncValueWidget(
+      body: BrandBackground(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: SafeArea(
+          child: AppAsyncValueWidget(
           value: catalogAsync,
           builder: (catalog) {
             final place = catalog.places.firstWhere(
@@ -91,25 +95,14 @@ class _PlaceDetailsPageState extends ConsumerState<PlaceDetailsPage> {
                     delegate: SliverChildListDelegate([
                       Text(
                         place.description,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyLarge?.copyWith(height: 1.55),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.86),
+                          height: 1.55,
+                        ),
                       ),
                       const SizedBox(height: 20),
-                      Container(
+                      BrandPanel(
                         padding: const EdgeInsets.all(18),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(24),
-                          border: Border.all(color: AppColors.sand),
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.deepBlue.withValues(alpha: 0.04),
-                              blurRadius: 18,
-                              offset: const Offset(0, 10),
-                            ),
-                          ],
-                        ),
                         child: Column(
                           children: [
                             _DetailRow(
@@ -141,8 +134,14 @@ class _PlaceDetailsPageState extends ConsumerState<PlaceDetailsPage> {
                             .map(
                               (tag) => Chip(
                                 label: Text(tag),
-                                backgroundColor: Colors.white,
-                                side: BorderSide(color: AppColors.sandDark),
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                                backgroundColor:
+                                    Colors.white.withValues(alpha: 0.12),
+                                side: BorderSide(
+                                  color: Colors.white.withValues(alpha: 0.16),
+                                ),
                               ),
                             )
                             .toList(),
@@ -210,6 +209,12 @@ class _PlaceDetailsPageState extends ConsumerState<PlaceDetailsPage> {
                           Expanded(
                             child: OutlinedButton.icon(
                               onPressed: () => context.push('/planner'),
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                side: BorderSide(
+                                  color: Colors.white.withValues(alpha: 0.24),
+                                ),
+                              ),
                               icon: const Icon(Icons.auto_awesome_rounded),
                               label: const Text('Add to trip'),
                             ),
@@ -220,7 +225,10 @@ class _PlaceDetailsPageState extends ConsumerState<PlaceDetailsPage> {
                       if (related.isNotEmpty) ...[
                         Text(
                           'More in ${governorate.name}',
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
                         ),
                         const SizedBox(height: 14),
                         SizedBox(
@@ -251,6 +259,7 @@ class _PlaceDetailsPageState extends ConsumerState<PlaceDetailsPage> {
               ],
             );
           },
+        ),
         ),
       ),
     );
@@ -452,12 +461,19 @@ class _DetailRow extends StatelessWidget {
             width: 110,
             child: Text(
               label,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: AppColors.muted),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Colors.white.withValues(alpha: 0.7),
+              ),
             ),
           ),
-          Expanded(child: Text(value)),
+          Expanded(
+            child: Text(
+              value,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Colors.white,
+              ),
+            ),
+          ),
         ],
       ),
     );

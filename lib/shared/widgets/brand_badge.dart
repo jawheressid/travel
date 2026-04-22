@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../theme/app_colors.dart';
-
 class BrandBadge extends StatelessWidget {
   const BrandBadge({
     required this.label,
@@ -19,13 +17,16 @@ class BrandBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       decoration: BoxDecoration(
-        color: background ?? AppColors.terracotta.withValues(alpha: 0.12),
+        color: background ?? Colors.white.withValues(alpha: 0.14),
         borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: (foreground ?? Colors.white).withValues(alpha: 0.22),
+        ),
       ),
       child: Text(
         label.toUpperCase(),
         style: Theme.of(context).textTheme.labelMedium?.copyWith(
-          color: foreground ?? AppColors.terracotta,
+          color: foreground ?? Colors.white,
           fontWeight: FontWeight.w800,
           letterSpacing: 0.5,
         ),

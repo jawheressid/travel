@@ -11,27 +11,20 @@ class BrandWordmark extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = light ? Colors.white : AppColors.deepBlue;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: compact ? 16 : 20,
-          height: compact ? 3 : 4,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(999),
-          ),
-        ),
-        const SizedBox(width: 8),
-        Text(
+    return Image.asset(
+      'assets/images/hkeyetna1.png',
+      height: compact ? 38 : 48,
+      fit: BoxFit.contain,
+      errorBuilder: (_, _, _) {
+        return Text(
           'HKEYETNA',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
             color: color,
             fontWeight: FontWeight.w800,
             letterSpacing: 0.6,
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

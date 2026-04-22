@@ -6,10 +6,11 @@ import '../../../core/enums/app_enums.dart';
 import '../../../core/providers/app_providers.dart';
 import '../../../core/utils/formatters.dart';
 import '../../../shared/widgets/app_async_value_widget.dart';
+import '../../../shared/widgets/brand_background.dart';
+import '../../../shared/widgets/brand_panel.dart';
 import '../../../shared/widgets/place_card.dart';
 import '../../../shared/widgets/safe_asset_image.dart';
 import '../../../shared/widgets/section_header.dart';
-import '../../../theme/app_colors.dart';
 
 class GovernorateDetailPage extends ConsumerWidget {
   const GovernorateDetailPage({required this.slug, super.key});
@@ -22,8 +23,10 @@ class GovernorateDetailPage extends ConsumerWidget {
     final favorites = ref.watch(favoritesControllerProvider).valueOrNull ?? {};
 
     return Scaffold(
-      body: SafeArea(
-        child: AppAsyncValueWidget(
+      body: BrandBackground(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: SafeArea(
+          child: AppAsyncValueWidget(
           value: catalogAsync,
           builder: (catalog) {
             final governorate = catalog.governorates.firstWhere(
@@ -49,21 +52,23 @@ class GovernorateDetailPage extends ConsumerWidget {
                     Text(
                       governorate.name,
                       style: Theme.of(context).textTheme.headlineMedium
-                          ?.copyWith(fontWeight: FontWeight.w800),
+                          ?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
                     ),
                     const SizedBox(height: 8),
-                    Text(governorate.description),
-                    const SizedBox(height: 18),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: AppColors.sandDark),
+                    Text(
+                      governorate.description,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Colors.white.withValues(alpha: 0.84),
                       ),
-                      child: const Text(
+                    ),
+                    const SizedBox(height: 18),
+                    const BrandPanel(
+                      child: Text(
                         'This governorate is currently shown as photo-only inspiration. Interactive content is active only for Bizerte, Le Kef, and Tozeur.',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ],
@@ -126,6 +131,7 @@ class GovernorateDetailPage extends ConsumerWidget {
             return CustomScrollView(
               slivers: [
                 SliverAppBar(
+                  backgroundColor: Colors.transparent,
                   pinned: true,
                   expandedHeight: 290,
                   flexibleSpace: FlexibleSpaceBar(
@@ -215,7 +221,19 @@ class GovernorateDetailPage extends ConsumerWidget {
                         spacing: 8,
                         runSpacing: 8,
                         children: governorate.featuredTags
-                            .map((tag) => Chip(label: Text(tag)))
+                            .map(
+                              (tag) => Chip(
+                                label: Text(tag),
+                                labelStyle: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                                backgroundColor:
+                                    Colors.white.withValues(alpha: 0.12),
+                                side: BorderSide(
+                                  color: Colors.white.withValues(alpha: 0.16),
+                                ),
+                              ),
+                            )
                             .toList(),
                       ),
                       const SizedBox(height: 24),
@@ -233,6 +251,7 @@ class GovernorateDetailPage extends ConsumerWidget {
             );
           },
         ),
+        ),
       ),
     );
   }
@@ -246,24 +265,25 @@ class _StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return BrandPanel(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: AppColors.sand),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             value,
-            style: Theme.of(
-              context,
-            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+            ),
           ),
           const SizedBox(height: 4),
-          Text(label),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.white.withValues(alpha: 0.8),
+            ),
+          ),
         ],
       ),
     );

@@ -23,14 +23,38 @@ class SectionHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: Theme.of(context).textTheme.titleLarge),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
               const SizedBox(height: 4),
-              Text(subtitle),
+              Text(
+                subtitle,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.white.withValues(alpha: 0.82),
+                  height: 1.45,
+                ),
+              ),
             ],
           ),
         ),
         if (actionLabel != null && onAction != null)
-          TextButton(onPressed: onAction, child: Text(actionLabel!)),
+          TextButton(
+            onPressed: onAction,
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.white.withValues(alpha: 0.12),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: BorderSide(color: Colors.white.withValues(alpha: 0.16)),
+              ),
+            ),
+            child: Text(actionLabel!),
+          ),
       ],
     );
   }

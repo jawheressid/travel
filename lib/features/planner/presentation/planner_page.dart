@@ -131,14 +131,20 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
                       children: [
                         IconButton(
                           onPressed: () => context.pop(),
-                          icon: const Icon(Icons.arrow_back_rounded),
+                          icon: const Icon(
+                            Icons.arrow_back_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                         const Spacer(),
                         const BrandWordmark(compact: true),
                         const Spacer(),
                         IconButton(
                           onPressed: () => context.go('/home'),
-                          icon: const Icon(Icons.home_rounded),
+                          icon: const Icon(
+                            Icons.home_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -161,7 +167,10 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
                           Text(
                             'Create My Dream Stay',
                             style: Theme.of(context).textTheme.displaySmall
-                                ?.copyWith(color: AppColors.mediterraneanBlue),
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w800,
+                                ),
                           ),
                           const SizedBox(height: 8),
                           Text(
@@ -208,7 +217,7 @@ class _PlannerPageState extends ConsumerState<PlannerPage> {
                           Text(
                             formatCurrency(_budget),
                             style: Theme.of(context).textTheme.displaySmall
-                                ?.copyWith(color: AppColors.deepBlue),
+                                ?.copyWith(color: Colors.white),
                           ),
                           Slider(
                             value: _budget,
@@ -481,18 +490,28 @@ class _MetricCard extends StatelessWidget {
       child: Ink(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: AppColors.offWhite,
+          color: Colors.white.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(22),
-          border: Border.all(color: AppColors.sandDark),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: AppColors.deepBlue),
+            Icon(icon, color: Colors.white),
             const SizedBox(height: 12),
-            Text(label, style: Theme.of(context).textTheme.bodySmall),
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Colors.white.withValues(alpha: 0.78),
+              ),
+            ),
             const SizedBox(height: 4),
-            Text(value, style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              value,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.white,
+              ),
+            ),
           ],
         ),
       ),

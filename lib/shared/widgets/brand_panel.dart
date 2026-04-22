@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
-import '../../theme/app_colors.dart';
+import 'package:flutter/material.dart';
 
 class BrandPanel extends StatelessWidget {
   const BrandPanel({
@@ -20,23 +20,40 @@ class BrandPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding,
-      decoration: BoxDecoration(
-        color: color ?? Colors.white.withValues(alpha: 0.96),
-        borderRadius: BorderRadius.circular(radius),
-        border: Border.all(
-          color: borderColor ?? AppColors.sandDark.withValues(alpha: 0.7),
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x120D3C79),
-            blurRadius: 28,
-            offset: Offset(0, 16),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+        child: Container(
+          padding: padding,
+          decoration: BoxDecoration(
+            color: color ?? Colors.white.withValues(alpha: 0.16),
+            borderRadius: BorderRadius.circular(radius),
+            border: Border.all(
+              color: borderColor ?? Colors.white.withValues(alpha: 0.22),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.24),
+                blurRadius: 34,
+                offset: const Offset(0, 18),
+              ),
+              BoxShadow(
+                color: Colors.white.withValues(alpha: 0.05),
+                blurRadius: 8,
+                offset: const Offset(-2, -2),
+              ),
+            ],
           ),
-        ],
+          child: IconTheme.merge(
+            data: const IconThemeData(color: Colors.white),
+            child: DefaultTextStyle.merge(
+              style: const TextStyle(color: Colors.white),
+              child: child,
+            ),
+          ),
+        ),
       ),
-      child: child,
     );
   }
 }

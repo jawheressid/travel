@@ -108,14 +108,20 @@ class ItineraryPage extends ConsumerWidget {
                           children: [
                             IconButton(
                               onPressed: () => context.pop(),
-                              icon: const Icon(Icons.arrow_back_rounded),
+                              icon: const Icon(
+                                Icons.arrow_back_rounded,
+                                color: Colors.white,
+                              ),
                             ),
                             const Spacer(),
                             const BrandWordmark(compact: true),
                             const Spacer(),
                             IconButton(
                               onPressed: () => context.push('/cart'),
-                              icon: const Icon(Icons.shopping_bag_rounded),
+                              icon: const Icon(
+                                Icons.shopping_bag_rounded,
+                                color: Colors.white,
+                              ),
                             ),
                           ],
                         ),
@@ -238,8 +244,11 @@ class ItineraryPage extends ConsumerWidget {
                                 width: double.infinity,
                                 padding: const EdgeInsets.all(18),
                                 decoration: BoxDecoration(
-                                  color: AppColors.mistBlue,
+                                  color: Colors.white.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(24),
+                                  border: Border.all(
+                                    color: Colors.white.withValues(alpha: 0.14),
+                                  ),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -248,11 +257,21 @@ class ItineraryPage extends ConsumerWidget {
                                       'Route map',
                                       style: Theme.of(
                                         context,
-                                      ).textTheme.titleMedium,
+                                      ).textTheme.titleMedium?.copyWith(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
                                     const SizedBox(height: 8),
-                                    const Text(
+                                    Text(
                                       'Map integration is ready for real coordinates. This version keeps a clean route placeholder while the itinerary logic stays functional.',
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodyMedium?.copyWith(
+                                        color: Colors.white.withValues(
+                                          alpha: 0.8,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -295,7 +314,9 @@ class ItineraryPage extends ConsumerWidget {
                                               Container(
                                                 width: 2,
                                                 height: 140,
-                                                color: AppColors.sandDark,
+                                                color: Colors.white.withValues(
+                                                  alpha: 0.18,
+                                                ),
                                               ),
                                           ],
                                         ),
@@ -305,12 +326,16 @@ class ItineraryPage extends ConsumerWidget {
                                         child: Container(
                                           padding: const EdgeInsets.all(18),
                                           decoration: BoxDecoration(
-                                            color: AppColors.offWhite,
+                                            color: Colors.white.withValues(
+                                              alpha: 0.08,
+                                            ),
                                             borderRadius: BorderRadius.circular(
                                               24,
                                             ),
                                             border: Border.all(
-                                              color: AppColors.sandDark,
+                                              color: Colors.white.withValues(
+                                                alpha: 0.14,
+                                              ),
                                             ),
                                           ),
                                           child: Column(
@@ -360,16 +385,35 @@ class ItineraryPage extends ConsumerWidget {
                                                               vertical: 8,
                                                             ),
                                                         decoration: BoxDecoration(
-                                                          color: Colors.white,
+                                                          color: Colors.white
+                                                              .withValues(
+                                                                alpha: 0.12,
+                                                              ),
                                                           borderRadius:
                                                               BorderRadius.circular(
                                                                 18,
                                                               ),
+                                                          border: Border.all(
+                                                            color: Colors.white
+                                                                .withValues(
+                                                                  alpha: 0.14,
+                                                                ),
+                                                          ),
                                                         ),
                                                         child: Text(
                                                           item.startTime,
                                                           textAlign:
                                                               TextAlign.center,
+                                                          style: Theme.of(
+                                                            context,
+                                                          ).textTheme.bodyMedium
+                                                              ?.copyWith(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                              ),
                                                         ),
                                                       ),
                                                       const SizedBox(width: 12),
@@ -383,12 +427,14 @@ class ItineraryPage extends ConsumerWidget {
                                                               place.name,
                                                               style: Theme.of(context)
                                                                   .textTheme
-                                                                  .titleMedium
-                                                                  ?.copyWith(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                  ),
+                                                                .titleMedium
+                                                                ?.copyWith(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                ),
                                                             ),
                                                             const SizedBox(
                                                               height: 4,
@@ -397,10 +443,14 @@ class ItineraryPage extends ConsumerWidget {
                                                               governorate.name,
                                                               style: Theme.of(context)
                                                                   .textTheme
-                                                                  .bodySmall
-                                                                  ?.copyWith(
-                                                                    color: AppColors
-                                                                        .mediterraneanBlue,
+                                                                .bodySmall
+                                                                ?.copyWith(
+                                                                    color: Colors
+                                                                        .white
+                                                                        .withValues(
+                                                                          alpha:
+                                                                              0.72,
+                                                                        ),
                                                                   ),
                                                             ),
                                                             const SizedBox(
@@ -419,7 +469,15 @@ class ItineraryPage extends ConsumerWidget {
                                                                         context,
                                                                       )
                                                                       .textTheme
-                                                                      .bodySmall,
+                                                                      .bodySmall
+                                                                      ?.copyWith(
+                                                                        color: Colors
+                                                                            .white
+                                                                            .withValues(
+                                                                          alpha:
+                                                                              0.88,
+                                                                        ),
+                                                                      ),
                                                             ),
                                                           ],
                                                         ),
@@ -476,6 +534,12 @@ class ItineraryPage extends ConsumerWidget {
                             Expanded(
                               child: OutlinedButton(
                                 onPressed: () => context.push('/planner'),
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  side: BorderSide(
+                                    color: Colors.white.withValues(alpha: 0.24),
+                                  ),
+                                ),
                                 child: const Text('Customize'),
                               ),
                             ),
@@ -514,18 +578,25 @@ class _OverviewStat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return BrandPanel(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(24),
-      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(value, style: Theme.of(context).textTheme.titleLarge),
+          Text(
+            value,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           const SizedBox(height: 6),
-          Text(label, style: Theme.of(context).textTheme.bodySmall),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: Colors.white.withValues(alpha: 0.78),
+            ),
+          ),
         ],
       ),
     );
@@ -542,11 +613,16 @@ class _FactPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: AppColors.sandDark),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
       ),
-      child: Text(label),
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }

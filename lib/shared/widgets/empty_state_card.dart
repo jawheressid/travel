@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/app_colors.dart';
+import 'brand_panel.dart';
 
 class EmptyStateCard extends StatelessWidget {
   const EmptyStateCard({
@@ -18,33 +19,53 @@ class EmptyStateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
+    return BrandPanel(
       padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(28),
-        border: Border.all(color: AppColors.sand),
-      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.explore_rounded,
-            size: 44,
-            color: AppColors.deepBlue,
+          Container(
+            width: 68,
+            height: 68,
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.14),
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+            ),
+            child: const Icon(
+              Icons.explore_rounded,
+              size: 34,
+              color: Colors.white,
+            ),
           ),
           const SizedBox(height: 16),
           Text(
             title,
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
-          Text(message, textAlign: TextAlign.center),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.white.withValues(alpha: 0.82),
+              height: 1.45,
+            ),
+          ),
           if (actionLabel != null && onAction != null) ...[
             const SizedBox(height: 18),
-            ElevatedButton(onPressed: onAction, child: Text(actionLabel!)),
+            ElevatedButton(
+              onPressed: onAction,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: AppColors.deepBlue,
+              ),
+              child: Text(actionLabel!),
+            ),
           ],
         ],
       ),

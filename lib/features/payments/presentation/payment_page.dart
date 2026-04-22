@@ -62,7 +62,10 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                       children: [
                         IconButton(
                           onPressed: () => context.pop(),
-                          icon: const Icon(Icons.arrow_back_rounded),
+                          icon: const Icon(
+                            Icons.arrow_back_rounded,
+                            color: Colors.white,
+                          ),
                         ),
                         const Spacer(),
                         const BrandWordmark(compact: true),
@@ -71,7 +74,7 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                           formatCurrency(previewTotal),
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(
-                                color: AppColors.deepBlue,
+                                color: Colors.white,
                                 fontWeight: FontWeight.w800,
                               ),
                         ),
@@ -81,7 +84,8 @@ class _PaymentPageState extends ConsumerState<PaymentPage> {
                     Text(
                       'Secure Checkout',
                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        color: AppColors.mediterraneanBlue,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
                       ),
                     ),
                     const SizedBox(height: 18),
@@ -308,39 +312,47 @@ class _MethodTile extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(22),
             color: selected
-                ? AppColors.mediterraneanBlue.withValues(alpha: 0.10)
-                : AppColors.offWhite,
+                ? Colors.white.withValues(alpha: 0.16)
+                : Colors.white.withValues(alpha: 0.08),
             border: Border.all(
               color: selected
-                  ? AppColors.mediterraneanBlue
-                  : AppColors.sandDark,
+                  ? Colors.white.withValues(alpha: 0.3)
+                  : Colors.white.withValues(alpha: 0.14),
               width: selected ? 1.5 : 1,
             ),
           ),
           child: Row(
             children: [
               CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(icon, color: AppColors.deepBlue),
+                backgroundColor: Colors.white.withValues(alpha: 0.16),
+                child: Icon(icon, color: Colors.white),
               ),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(label, style: Theme.of(context).textTheme.titleMedium),
+                    Text(
+                      label,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.white.withValues(alpha: 0.76),
+                      ),
                     ),
                   ],
                 ),
               ),
               if (selected)
-                const Icon(
+                Icon(
                   Icons.check_circle_rounded,
-                  color: AppColors.mediterraneanBlue,
+                  color: Colors.white.withValues(alpha: 0.94),
                 ),
             ],
           ),
@@ -363,8 +375,19 @@ class _SummaryRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label),
-          Text(value, style: Theme.of(context).textTheme.titleMedium),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.white.withValues(alpha: 0.78),
+            ),
+          ),
+          Text(
+            value,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ],
       ),
     );
