@@ -32,31 +32,76 @@ class AuthLandingPage extends ConsumerWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(28),
-                      child: const SizedBox(
-                        height: 300,
-                        width: double.infinity,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            SafeAssetImage(
-                              path: 'assets/images/onboarding/auth_cover.jpg',
-                              title: 'HKEYETNA',
-                              borderRadius: 28,
+                    Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(28),
+                          child: SizedBox(
+                            height: 316,
+                            width: double.infinity,
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                const SafeAssetImage(
+                                  path:
+                                      'assets/images/onboarding/auth_cover.jpg',
+                                  title: 'HKEYETNA',
+                                  borderRadius: 28,
+                                  alignment: Alignment.centerLeft,
+                                ),
+                                Positioned.fill(
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Colors.black.withValues(alpha: 0.26),
+                                          Colors.transparent,
+                                          AppColors.offWhite.withValues(
+                                            alpha: 0.90,
+                                          ),
+                                        ],
+                                        stops: const [0.0, 0.52, 1.0],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 18,
+                                  left: 18,
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      color: Colors.black.withValues(
+                                        alpha: 0.20,
+                                      ),
+                                      borderRadius: BorderRadius.circular(14),
+                                    ),
+                                    child: const Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 8,
+                                      ),
+                                      child: BrandWordmark(light: true),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            Positioned(
-                              top: 18,
-                              left: 18,
-                              child: BrandWordmark(light: true),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        const Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: -14,
+                          child: Center(
+                            child: BrandBadge(label: 'Travel differently'),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 18),
-                    const BrandBadge(label: 'Travel differently'),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 28),
                     Text(
                       'HKEYETNA',
                       style: Theme.of(context).textTheme.displaySmall?.copyWith(
@@ -66,7 +111,7 @@ class AuthLandingPage extends ConsumerWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Explore the new to find good places',
+                      'Explore Tunisia in a deeper, more local way',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),

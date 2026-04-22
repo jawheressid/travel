@@ -9,6 +9,7 @@ class SafeAssetImage extends StatelessWidget {
     this.height,
     this.borderRadius = 24,
     this.fit = BoxFit.cover,
+    this.alignment = Alignment.center,
     super.key,
   });
 
@@ -17,6 +18,7 @@ class SafeAssetImage extends StatelessWidget {
   final double? height;
   final double borderRadius;
   final BoxFit fit;
+  final Alignment alignment;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,7 @@ class SafeAssetImage extends StatelessWidget {
           height: height,
           width: double.infinity,
           fit: fit,
+          alignment: alignment,
           errorBuilder: (_, _, _) => placeholder,
         ),
       );
@@ -69,6 +72,7 @@ class SafeAssetImage extends StatelessWidget {
         height: height,
         width: double.infinity,
         fit: fit,
+        alignment: alignment,
         errorBuilder: (_, _, _) => placeholder,
       ),
     );

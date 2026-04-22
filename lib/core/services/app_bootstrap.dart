@@ -16,7 +16,11 @@ class AppBootstrap {
   final SupabaseClient? supabaseClient;
 
   static Future<AppBootstrap> create() async {
-    await dotenv.load(fileName: '.env');
+    try {
+      await dotenv.load(fileName: '.env');
+    } catch (_) {
+      // .env can be omitted when values are provided via --dart-define.
+    }
     final environment = AppEnvironment.fromDotEnv();
     final sharedPreferences = await SharedPreferences.getInstance();
 

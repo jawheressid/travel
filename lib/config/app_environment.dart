@@ -7,9 +7,18 @@ class AppEnvironment {
   });
 
   factory AppEnvironment.fromDotEnv() {
+    // Prefer values loaded from .env assets, then fall back to dart-define.
+    // This keeps release builds working in CI/CD when .env is not bundled.
+    final supabaseUrl =
+        dotenv.env['SUPABASE_URL']?.trim() ??
+        const String.fromEnvironment('SUPABASE_URL').trim();
+    final supabaseAnonKey =
+        dotenv.env['SUPABASE_ANON_KEY']?.trim() ??
+        const String.fromEnvironment('SUPABASE_ANON_KEY').trim();
+
     return AppEnvironment(
-      supabaseUrl: dotenv.env['SUPABASE_URL']?.trim() ?? '',
-      supabaseAnonKey: dotenv.env['SUPABASE_ANON_KEY']?.trim() ?? '',
+      supabaseUrl: supabaseUrl,
+      supabaseAnonKey: supabaseAnonKey,
     );
   }
 

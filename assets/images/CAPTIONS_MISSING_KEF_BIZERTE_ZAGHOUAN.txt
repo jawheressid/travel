@@ -1,0 +1,220 @@
+﻿Captions for missing images (kef, bizerte, zaghouan)
+generated_at=2026-04-21
+count=72
+
+1. assets/images/regions/bizerte_cover.jpg
+   caption: Bizerte cover - Northern sea light, medina charm, cliffs, lagoons, and seafood culture.
+
+2. assets/images/regions/bizerte_hero.jpg
+   caption: Bizerte hero - Northern sea light, medina charm, cliffs, lagoons, and seafood culture.
+
+3. assets/images/regions/kef_cover.jpg
+   caption: Kef cover - Hilltop history, strong regional food, and heritage layers looking over the northwest.
+
+4. assets/images/regions/kef_hero.jpg
+   caption: Kef hero - Hilltop history, strong regional food, and heritage layers looking over the northwest.
+
+5. assets/images/regions/zaghouan_cover.jpg
+   caption: Zaghouan cover - Mountain views, Roman heritage, and fresh-air routes just inland from the coast.
+
+6. assets/images/regions/zaghouan_hero.jpg
+   caption: Zaghouan hero - Mountain views, Roman heritage, and fresh-air routes just inland from the coast.
+
+7. assets/images/places/bizerte_accommodation_1.jpg
+   caption: Dar Bizerte Sea House - Boutique courtyard stay curated for culture-led city breaks. A design-led local stay in Bizerte with breakfast, concierge help, and nearby heritage routes.
+
+8. assets/images/places/bizerte_accommodation_2.jpg
+   caption: Bizerte Harbor Guest Lodge - Comfortable guest stay with easy access to local food and activities. Flexible stay option in Bizerte suited to couples, families, and friends exploring the region.
+
+9. assets/images/places/bizerte_accommodation_21.jpg
+   caption: Dar Bizerte Sea House gallery - Secondary gallery view for Dar Bizerte Sea House in Bizerte.
+
+10. assets/images/places/bizerte_accommodation_22.jpg
+   caption: Bizerte Harbor Guest Lodge gallery - Secondary gallery view for Bizerte Harbor Guest Lodge in Bizerte.
+
+11. assets/images/places/bizerte_activity_27.jpg
+   caption: Bizerte Cycling Escape gallery - Secondary gallery view for Bizerte Cycling Escape in Bizerte.
+
+12. assets/images/places/bizerte_activity_28.jpg
+   caption: Bizerte Breeze Adventure Trail gallery - Secondary gallery view for Bizerte Breeze Adventure Trail in Bizerte.
+
+13. assets/images/places/bizerte_activity_7.jpg
+   caption: Bizerte Cycling Escape - Guided cycling route linking scenic stops, food breaks, and local encounters. A cycle-friendly route in Bizerte designed for curious travelers seeking active discovery.
+
+14. assets/images/places/bizerte_activity_8.jpg
+   caption: Bizerte Breeze Adventure Trail - Immersive active outing with local guides and strong sense of place. Bookable outdoor adventure in Bizerte with local guide support, stories, and practical logistics included.
+
+15. assets/images/places/bizerte_artisan_25.jpg
+   caption: Bizerte Heritage Atelier gallery - Secondary gallery view for Bizerte Heritage Atelier in Bizerte.
+
+16. assets/images/places/bizerte_artisan_26.jpg
+   caption: Blue Door Crafts Bizerte gallery - Secondary gallery view for Blue Door Crafts Bizerte in Bizerte.
+
+17. assets/images/places/bizerte_artisan_5.jpg
+   caption: Bizerte Heritage Atelier - Meet makers preserving regional craft gestures through hands-on workshops. Local artisan studio in Bizerte offering demonstrations, small-batch products, and cultural context.
+
+18. assets/images/places/bizerte_artisan_6.jpg
+   caption: Blue Door Crafts Bizerte - Textile, ceramics, or woodwork collections inspired by Tunisian detail. Curated artisan address in Bizerte where travelers can shop responsibly and learn about local techniques.
+
+19. assets/images/places/bizerte_museum_29.jpg
+   caption: Bizerte Living Heritage House gallery - Secondary gallery view for Bizerte Living Heritage House in Bizerte.
+
+20. assets/images/places/bizerte_museum_9.jpg
+   caption: Bizerte Living Heritage House - Compact cultural stop connecting architecture, objects, and stories of the region. A heritage venue in Bizerte presenting architecture, memory, and craft in a visitor-friendly format.
+
+21. assets/images/places/bizerte_naturespot_11.jpg
+   caption: Bizerte Sea Nature Lookout - Scenic stop for slow walks, light hikes, and panoramic views. Accessible nature point in Bizerte offering guided walks, open views, and easy half-day planning.
+
+22. assets/images/places/bizerte_naturespot_31.jpg
+   caption: Bizerte Sea Nature Lookout gallery - Secondary gallery view for Bizerte Sea Nature Lookout in Bizerte.
+
+23. assets/images/places/bizerte_restaurant_23.jpg
+   caption: Bizerte Medina Table gallery - Secondary gallery view for Bizerte Medina Table in Bizerte.
+
+24. assets/images/places/bizerte_restaurant_24.jpg
+   caption: Olive Route Kitchen Bizerte gallery - Secondary gallery view for Olive Route Kitchen Bizerte in Bizerte.
+
+25. assets/images/places/bizerte_restaurant_3.jpg
+   caption: Bizerte Medina Table - Seasonal Tunisian dishes, market ingredients, and generous local hospitality. A reliable culinary stop in Bizerte focused on regional recipes, tasting plates, and warm service.
+
+26. assets/images/places/bizerte_restaurant_4.jpg
+   caption: Olive Route Kitchen Bizerte - Modern local dining with shared plates and regional produce. Contemporary Tunisian cooking in Bizerte with polished plating and seasonal menus.
+
+27. assets/images/places/bizerte_transport_10.jpg
+   caption: Bizerte Local Ride Collective - Private and shared transfer options connecting stations, stays, and key sights. Reliable local transport partner in Bizerte with airport, station, city, and day-trip options.
+
+28. assets/images/places/bizerte_transport_30.jpg
+   caption: Bizerte Local Ride Collective gallery - Secondary gallery view for Bizerte Local Ride Collective in Bizerte.
+
+29. assets/images/places/kef_accommodation_1.jpg
+   caption: Dar Kef Ridge House - Boutique courtyard stay curated for culture-led city breaks. A design-led local stay in Kef with breakfast, concierge help, and nearby heritage routes.
+
+30. assets/images/places/kef_accommodation_2.jpg
+   caption: Kef Summit Guest Lodge - Comfortable guest stay with easy access to local food and activities. Flexible stay option in Kef suited to couples, families, and friends exploring the region.
+
+31. assets/images/places/kef_accommodation_21.jpg
+   caption: Dar Kef Ridge House gallery - Secondary gallery view for Dar Kef Ridge House in Kef.
+
+32. assets/images/places/kef_accommodation_22.jpg
+   caption: Kef Summit Guest Lodge gallery - Secondary gallery view for Kef Summit Guest Lodge in Kef.
+
+33. assets/images/places/kef_activity_27.jpg
+   caption: Kef Cycling Escape gallery - Secondary gallery view for Kef Cycling Escape in Kef.
+
+34. assets/images/places/kef_activity_28.jpg
+   caption: Kef Spring Adventure Trail gallery - Secondary gallery view for Kef Spring Adventure Trail in Kef.
+
+35. assets/images/places/kef_activity_7.jpg
+   caption: Kef Cycling Escape - Guided cycling route linking scenic stops, food breaks, and local encounters. A cycle-friendly route in Kef designed for curious travelers seeking active discovery.
+
+36. assets/images/places/kef_activity_8.jpg
+   caption: Kef Spring Adventure Trail - Immersive active outing with local guides and strong sense of place. Bookable outdoor adventure in Kef with local guide support, stories, and practical logistics included.
+
+37. assets/images/places/kef_artisan_25.jpg
+   caption: Kef Heritage Atelier gallery - Secondary gallery view for Kef Heritage Atelier in Kef.
+
+38. assets/images/places/kef_artisan_26.jpg
+   caption: Blue Door Crafts Kef gallery - Secondary gallery view for Blue Door Crafts Kef in Kef.
+
+39. assets/images/places/kef_artisan_5.jpg
+   caption: Kef Heritage Atelier - Meet makers preserving regional craft gestures through hands-on workshops. Local artisan studio in Kef offering demonstrations, small-batch products, and cultural context.
+
+40. assets/images/places/kef_artisan_6.jpg
+   caption: Blue Door Crafts Kef - Textile, ceramics, or woodwork collections inspired by Tunisian detail. Curated artisan address in Kef where travelers can shop responsibly and learn about local techniques.
+
+41. assets/images/places/kef_museum_29.jpg
+   caption: Kef Living Heritage House gallery - Secondary gallery view for Kef Living Heritage House in Kef.
+
+42. assets/images/places/kef_museum_9.jpg
+   caption: Kef Living Heritage House - Compact cultural stop connecting architecture, objects, and stories of the region. A heritage venue in Kef presenting architecture, memory, and craft in a visitor-friendly format.
+
+43. assets/images/places/kef_naturespot_11.jpg
+   caption: Kef Ridge Nature Lookout - Scenic stop for slow walks, light hikes, and panoramic views. Accessible nature point in Kef offering guided walks, open views, and easy half-day planning.
+
+44. assets/images/places/kef_naturespot_31.jpg
+   caption: Kef Ridge Nature Lookout gallery - Secondary gallery view for Kef Ridge Nature Lookout in Kef.
+
+45. assets/images/places/kef_restaurant_23.jpg
+   caption: Kef Medina Table gallery - Secondary gallery view for Kef Medina Table in Kef.
+
+46. assets/images/places/kef_restaurant_24.jpg
+   caption: Olive Route Kitchen Kef gallery - Secondary gallery view for Olive Route Kitchen Kef in Kef.
+
+47. assets/images/places/kef_restaurant_3.jpg
+   caption: Kef Medina Table - Seasonal Tunisian dishes, market ingredients, and generous local hospitality. A reliable culinary stop in Kef focused on regional recipes, tasting plates, and warm service.
+
+48. assets/images/places/kef_restaurant_4.jpg
+   caption: Olive Route Kitchen Kef - Modern local dining with shared plates and regional produce. Contemporary Tunisian cooking in Kef with polished plating and seasonal menus.
+
+49. assets/images/places/kef_transport_10.jpg
+   caption: Kef Local Ride Collective - Private and shared transfer options connecting stations, stays, and key sights. Reliable local transport partner in Kef with airport, station, city, and day-trip options.
+
+50. assets/images/places/kef_transport_30.jpg
+   caption: Kef Local Ride Collective gallery - Secondary gallery view for Kef Local Ride Collective in Kef.
+
+51. assets/images/places/zaghouan_accommodation_1.jpg
+   caption: Dar Zaghouan Ridge House - Boutique courtyard stay curated for culture-led city breaks. A design-led local stay in Zaghouan with breakfast, concierge help, and nearby heritage routes.
+
+52. assets/images/places/zaghouan_accommodation_2.jpg
+   caption: Zaghouan Summit Guest Lodge - Comfortable guest stay with easy access to local food and activities. Flexible stay option in Zaghouan suited to couples, families, and friends exploring the region.
+
+53. assets/images/places/zaghouan_accommodation_21.jpg
+   caption: Dar Zaghouan Ridge House gallery - Secondary gallery view for Dar Zaghouan Ridge House in Zaghouan.
+
+54. assets/images/places/zaghouan_accommodation_22.jpg
+   caption: Zaghouan Summit Guest Lodge gallery - Secondary gallery view for Zaghouan Summit Guest Lodge in Zaghouan.
+
+55. assets/images/places/zaghouan_activity_27.jpg
+   caption: Zaghouan Cycling Escape gallery - Secondary gallery view for Zaghouan Cycling Escape in Zaghouan.
+
+56. assets/images/places/zaghouan_activity_28.jpg
+   caption: Zaghouan Spring Adventure Trail gallery - Secondary gallery view for Zaghouan Spring Adventure Trail in Zaghouan.
+
+57. assets/images/places/zaghouan_activity_7.jpg
+   caption: Zaghouan Cycling Escape - Guided cycling route linking scenic stops, food breaks, and local encounters. A cycle-friendly route in Zaghouan designed for curious travelers seeking active discovery.
+
+58. assets/images/places/zaghouan_activity_8.jpg
+   caption: Zaghouan Spring Adventure Trail - Immersive active outing with local guides and strong sense of place. Bookable outdoor adventure in Zaghouan with local guide support, stories, and practical logistics included.
+
+59. assets/images/places/zaghouan_artisan_25.jpg
+   caption: Zaghouan Heritage Atelier gallery - Secondary gallery view for Zaghouan Heritage Atelier in Zaghouan.
+
+60. assets/images/places/zaghouan_artisan_26.jpg
+   caption: Blue Door Crafts Zaghouan gallery - Secondary gallery view for Blue Door Crafts Zaghouan in Zaghouan.
+
+61. assets/images/places/zaghouan_artisan_5.jpg
+   caption: Zaghouan Heritage Atelier - Meet makers preserving regional craft gestures through hands-on workshops. Local artisan studio in Zaghouan offering demonstrations, small-batch products, and cultural context.
+
+62. assets/images/places/zaghouan_artisan_6.jpg
+   caption: Blue Door Crafts Zaghouan - Textile, ceramics, or woodwork collections inspired by Tunisian detail. Curated artisan address in Zaghouan where travelers can shop responsibly and learn about local techniques.
+
+63. assets/images/places/zaghouan_museum_29.jpg
+   caption: Zaghouan Living Heritage House gallery - Secondary gallery view for Zaghouan Living Heritage House in Zaghouan.
+
+64. assets/images/places/zaghouan_museum_9.jpg
+   caption: Zaghouan Living Heritage House - Compact cultural stop connecting architecture, objects, and stories of the region. A heritage venue in Zaghouan presenting architecture, memory, and craft in a visitor-friendly format.
+
+65. assets/images/places/zaghouan_naturespot_11.jpg
+   caption: Zaghouan Ridge Nature Lookout - Scenic stop for slow walks, light hikes, and panoramic views. Accessible nature point in Zaghouan offering guided walks, open views, and easy half-day planning.
+
+66. assets/images/places/zaghouan_naturespot_31.jpg
+   caption: Zaghouan Ridge Nature Lookout gallery - Secondary gallery view for Zaghouan Ridge Nature Lookout in Zaghouan.
+
+67. assets/images/places/zaghouan_restaurant_23.jpg
+   caption: Zaghouan Medina Table gallery - Secondary gallery view for Zaghouan Medina Table in Zaghouan.
+
+68. assets/images/places/zaghouan_restaurant_24.jpg
+   caption: Olive Route Kitchen Zaghouan gallery - Secondary gallery view for Olive Route Kitchen Zaghouan in Zaghouan.
+
+69. assets/images/places/zaghouan_restaurant_3.jpg
+   caption: Zaghouan Medina Table - Seasonal Tunisian dishes, market ingredients, and generous local hospitality. A reliable culinary stop in Zaghouan focused on regional recipes, tasting plates, and warm service.
+
+70. assets/images/places/zaghouan_restaurant_4.jpg
+   caption: Olive Route Kitchen Zaghouan - Modern local dining with shared plates and regional produce. Contemporary Tunisian cooking in Zaghouan with polished plating and seasonal menus.
+
+71. assets/images/places/zaghouan_transport_10.jpg
+   caption: Zaghouan Local Ride Collective - Private and shared transfer options connecting stations, stays, and key sights. Reliable local transport partner in Zaghouan with airport, station, city, and day-trip options.
+
+72. assets/images/places/zaghouan_transport_30.jpg
+   caption: Zaghouan Local Ride Collective gallery - Secondary gallery view for Zaghouan Local Ride Collective in Zaghouan.
+
